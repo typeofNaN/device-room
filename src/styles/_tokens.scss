@@ -1,0 +1,19 @@
+// Workspace palette. Demo colors remain independent from the application chrome.
+$surface: #fff;
+$workspace-background: #f8f9fb;
+$text-primary: #292d35;
+$border-subtle: #e5e7eb;
+$accent: #3f755b;
+$accent-hover: #305e48;
+$status-positive: #5e9b77;
+$focus-ring: #96cdb9;
+
+$demo-text: #243e33;
+$demo-accent: #426c48;
+$demo-heading-accent: #62946c;
+
+// Viewport breakpoints, in CSS pixels.
+$mobile: 760px;
+$tablet: 1100px;
+$wide: 1500px;
+$demo-mobile: 600px;

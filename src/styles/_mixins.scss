@@ -1,0 +1,21 @@
+// A shared row layout; justification stays with the component using it.
+@mixin row($gap: null, $display: flex) {
+  display: $display;
+  align-items: center;
+
+  @if $gap != null {
+    gap: $gap;
+  }
+}
+
+@mixin below($width) {
+  @media (max-width: $width) {
+    @content;
+  }
+}
+
+@mixin above($width) {
+  @media (min-width: $width) {
+    @content;
+  }
+}

@@ -4,23 +4,25 @@
 
 ## 本地开发
 
+使用 Node.js 22 和 pnpm 10.13.0（版本由 `package.json` 的 `packageManager` 固定）。
+
 ```sh
-npm ci
-npm run dev
+pnpm install --frozen-lockfile
+pnpm run dev
 ```
 
 ```sh
-npm run build    # 类型检查并生成 dist/
-npm run preview  # 本地查看生产构建
+pnpm run build    # 类型检查并生成 dist/
+pnpm run preview  # 本地查看生产构建
 ```
 
 ## 代码检查与格式化
 
 ```sh
-npm run lint          # ESLint 检查 TypeScript、React Hooks 等规则
-npm run lint:fix      # 自动修复可修复的 lint 问题
-npm run format        # Prettier 格式化项目文件
-npm run format:check  # 检查格式，不修改文件
+pnpm run lint          # ESLint 检查 TypeScript、React Hooks 等规则
+pnpm run lint:fix      # 自动修复可修复的 lint 问题
+pnpm run format        # Prettier 格式化项目文件
+pnpm run format:check  # 检查格式，不修改文件
 ```
 
 ESLint 使用 flat config，Prettier 负责统一格式；`eslint-config-prettier` 避免两者的格式规则冲突。
@@ -49,7 +51,7 @@ GitHub Pages 使用 HTTPS，因此静态版会拒绝 HTTP 目标地址，避免�
 
 1. 仓库管理员在 **Settings → Pages → Build and deployment → Source** 选择 **GitHub Actions**。
 2. 推送代码到 `main` 分支，自动触发构建与部署；也可在 Actions 页面手动运行。
-3. 工作流使用 Node.js 22 执行 `npm ci`、`npm run build`，上传 `dist/` 并通过官方 Pages Action 发布。
+3. 工作流使用 Node.js 22 执行 `pnpm install --frozen-lockfile`、`pnpm run build`，上传 `dist/` 并通过官方 Pages Action 发布。
 4. 成功后在 Actions 的 `github-pages` 环境查看实际站点地址。此仓库默认地址为 `https://typeofnan.github.io/device-room/`（以 GitHub 返回的地址为准）。
 
 Vite 使用 `base: './'`，构建资源采用相对路径，适用于 GitHub Pages 的 `/device-room/` 子目录，也可以放在自定义域名根目录。无需配置 API 密钥、第三方部署 Token 或额外服务端。
@@ -68,4 +70,4 @@ Vite 使用 `base: './'`，构建资源采用相对路径，适用于 GitHub Pag
 
 ---
 
-A fully static responsive preview workspace. Run `npm ci` and `npm run dev` locally, or publish `dist/` to GitHub Pages. Chinese is the default language; English is available in the header. Previewed sites must allow iframe embedding. No server, browser engine, screenshot service, or cross-origin synchronization is included.
+A fully static responsive preview workspace. Run `pnpm install --frozen-lockfile` and `pnpm run dev` locally, or publish `dist/` to GitHub Pages. Chinese is the default language; English is available in the header. Previewed sites must allow iframe embedding. No server, browser engine, screenshot service, or cross-origin synchronization is included.

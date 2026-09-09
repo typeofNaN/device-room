@@ -1,10 +1,10 @@
-import { useState } from 'react';
-import { ArrowUpRight, ArrowRight, Check, Menu, Layers, Plus } from 'lucide-react';
-import type { Locale } from './i18n';
+import { useState } from 'react'
+import { ArrowUpRight, ArrowRight, Check, Menu, Layers, Plus } from 'lucide-react'
+import type { Locale } from './i18n'
 
 export default function Demo({ locale }: { locale: Locale }) {
-  const [submitted, setSubmitted] = useState(false);
-  const text = (zh: string, en: string) => (locale === 'zh' ? zh : en);
+  const [submitted, setSubmitted] = useState(false)
+  const text = (zh: string, en: string) => (locale === 'zh' ? zh : en)
   return (
     <div className="demo">
       <nav>
@@ -175,8 +175,8 @@ export default function Demo({ locale }: { locale: Locale }) {
         <h2>{text('为好作品，留出空间。', 'Make room for good work.')}</h2>
         <form
           onSubmit={(event) => {
-            event.preventDefault();
-            setSubmitted(true);
+            event.preventDefault()
+            setSubmitted(true)
           }}
         >
           <input
@@ -204,5 +204,5 @@ export default function Demo({ locale }: { locale: Locale }) {
         </span>
       </footer>
     </div>
-  );
+  )
 }

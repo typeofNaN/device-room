@@ -24,7 +24,7 @@ import {
 import { presets, type Device } from './devices'
 import { initialLocale, messages, type Locale } from './i18n'
 import Demo from './Demo'
-import demoStyles from './demo.css?inline'
+import demoStyles from './demo.scss?inline'
 
 const icons = { phone: Smartphone, tablet: Tablet, laptop: Laptop, desktop: Monitor }
 type Modal = 'devices' | 'settings' | 'help' | null

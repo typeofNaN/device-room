@@ -1,4 +1,4 @@
-export type Locale = 'zh' | 'en';
+export type Locale = 'zh' | 'en'
 export const messages = {
   zh: {
     workspace: '个人工作区',
@@ -153,11 +153,11 @@ export const messages = {
     desktop: '1920 Desktop',
     presetDpr: 'Reference device DPR (not emulated)',
   },
-} satisfies Record<Locale, Record<string, string>>;
+} satisfies Record<Locale, Record<string, string>>
 export function initialLocale(): Locale {
   try {
-    return localStorage.getItem('device-room-locale') === 'en' ? 'en' : 'zh';
+    return localStorage.getItem('device-room-locale') === 'en' ? 'en' : 'zh'
   } catch {
-    return 'zh';
+    return 'zh'
   }
 }

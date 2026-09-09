@@ -3,8 +3,22 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
+  "packageManager": "pnpm@10.13.0",
+  "author": {
+    "name": "typeofNaN",
+    "url": "https://github.com/typeofNaN",
+    "email": "dmdefine6@gmail.com"
+  },
+  "homepage": "https://github.com/typeofNaN/device-room",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/typeofNaN/device-room.git"
+  },
+  "bugs": {
+    "url": "https://github.com/typeofNaN/device-room/issues"
+  },
   "scripts": {
-    "dev": "vite --host 127.0.0.1",
+    "dev": "vite",
     "build": "tsc -b && vite build",
     "preview": "vite preview --host 127.0.0.1",
     "lint": "eslint .",
@@ -30,6 +44,9 @@
     "eslint-plugin-react-refresh": "^0.5.6",
     "globals": "^17.12.0",
     "prettier": "^3.9.6",
+    "prettier-plugin-css-order": "^2.2.0",
+    "prettier-plugin-tailwindcss": "^0.8.1",
+    "sass-embedded": "^1.104.0",
     "tailwindcss": "^4.1.0",
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.70.0",
