@@ -1,0 +1,36 @@
+@layer theme, base, components, utilities;
+@import 'tailwindcss/theme.css' layer(theme);
+@import 'tailwindcss/utilities.css' layer(utilities) source(none);
+@source './Demo.tsx';
+
+/* Keep browser defaults used by the original layout; component styles live in JSX. */
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+  html {
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+  }
+  body {
+    margin: 0;
+    color: #243e33;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  button {
+    font: inherit;
+  }
+  input {
+    font: inherit;
+  }
+  button {
+    cursor: pointer;
+  }
+  ::-webkit-scrollbar {
+    display: none;
+  }
+}
