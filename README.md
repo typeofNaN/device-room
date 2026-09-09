@@ -14,6 +14,17 @@ npm run build    # 类型检查并生成 dist/
 npm run preview  # 本地查看生产构建
 ```
 
+## 代码检查与格式化
+
+```sh
+npm run lint          # ESLint 检查 TypeScript、React Hooks 等规则
+npm run lint:fix      # 自动修复可修复的 lint 问题
+npm run format        # Prettier 格式化项目文件
+npm run format:check  # 检查格式，不修改文件
+```
+
+ESLint 使用 flat config，Prettier 负责统一格式；`eslint-config-prettier` 避免两者的格式规则冲突。
+
 ## 功能
 
 - 输入 URL，同时在 iPhone SE、iPhone 17 Pro、Pixel、iPad、MacBook 和桌面视口中预览。
