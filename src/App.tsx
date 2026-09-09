@@ -1,5 +1,5 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
-import { createPortal } from 'react-dom';
+import { useEffect, useMemo, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
 import {
   Smartphone,
   Tablet,
@@ -20,23 +20,23 @@ import {
   ExternalLink,
   LayoutGrid,
   Languages,
-} from 'lucide-react';
-import { presets, type Device } from './devices';
-import { initialLocale, messages, type Locale } from './i18n';
-import Demo from './Demo';
-import demoStyles from './demo.css?inline';
+} from 'lucide-react'
+import { presets, type Device } from './devices'
+import { initialLocale, messages, type Locale } from './i18n'
+import Demo from './Demo'
+import demoStyles from './demo.css?inline'
 
-const icons = { phone: Smartphone, tablet: Tablet, laptop: Laptop, desktop: Monitor };
-type Modal = 'devices' | 'settings' | 'help' | null;
+const icons = { phone: Smartphone, tablet: Tablet, laptop: Laptop, desktop: Monitor }
+type Modal = 'devices' | 'settings' | 'help' | null
 
 function DemoFrame({ device, scale, locale }: { device: Device; scale: number; locale: Locale }) {
-  const frame = useRef<HTMLIFrameElement>(null);
-  const [doc, setDoc] = useState<Document | null>(null);
+  const frame = useRef<HTMLIFrameElement>(null)
+  const [doc, setDoc] = useState<Document | null>(null)
   const html = useMemo(
     () =>
       `<!doctype html><html lang="${locale === 'zh' ? 'zh-CN' : 'en'}"><head><meta name="viewport" content="width=device-width,initial-scale=1"/><style>${demoStyles}</style></head><body><div id="demo-root"></div></body></html>`,
     [locale],
-  );
+  )
   return (
     <iframe
       ref={frame}
@@ -48,108 +48,108 @@ function DemoFrame({ device, scale, locale }: { device: Device; scale: number; l
       {doc?.getElementById('demo-root') &&
         createPortal(<Demo locale={locale} />, doc.getElementById('demo-root')!)}
     </iframe>
-  );
+  )
 }
 
 export default function App() {
-  const [locale, setLocale] = useState<Locale>(initialLocale);
-  const t = messages[locale];
-  const [selected, setSelected] = useState(presets.map((d) => d.id));
-  const [list, setList] = useState(presets);
-  const [rotated, setRotated] = useState<string[]>([]);
-  const [url, setUrl] = useState('');
-  const [currentUrl, setCurrentUrl] = useState('');
-  const [safe, setSafe] = useState(false);
-  const [cutout, setCutout] = useState(true);
-  const [zoom, setZoom] = useState('Auto');
-  const [modal, setModal] = useState<Modal>(null);
-  const [sideOpen, setSideOpen] = useState(true);
-  const [reload, setReload] = useState(0);
-  const [error, setError] = useState<'invalidUrl' | 'mixedContent' | null>(null);
-  const [customName, setCustomName] = useState('');
-  const [customWidth, setCustomWidth] = useState(390);
-  const [customHeight, setCustomHeight] = useState(844);
-  const dialogRef = useRef<HTMLElement>(null);
+  const [locale, setLocale] = useState<Locale>(initialLocale)
+  const t = messages[locale]
+  const [selected, setSelected] = useState(presets.map((d) => d.id))
+  const [list, setList] = useState(presets)
+  const [rotated, setRotated] = useState<string[]>([])
+  const [url, setUrl] = useState('')
+  const [currentUrl, setCurrentUrl] = useState('')
+  const [safe, setSafe] = useState(false)
+  const [cutout, setCutout] = useState(true)
+  const [zoom, setZoom] = useState('Auto')
+  const [modal, setModal] = useState<Modal>(null)
+  const [sideOpen, setSideOpen] = useState(true)
+  const [reload, setReload] = useState(0)
+  const [error, setError] = useState<'invalidUrl' | 'mixedContent' | null>(null)
+  const [customName, setCustomName] = useState('')
+  const [customWidth, setCustomWidth] = useState(390)
+  const [customHeight, setCustomHeight] = useState(844)
+  const dialogRef = useRef<HTMLElement>(null)
   const devices = list
     .filter((d) => selected.includes(d.id))
-    .map((d) => (rotated.includes(d.id) ? { ...d, width: d.height, height: d.width } : d));
-  const deviceName = (device: Device) => (device.id === 'desktop' ? t.desktop : device.name);
+    .map((d) => (rotated.includes(d.id) ? { ...d, width: d.height, height: d.width } : d))
+  const deviceName = (device: Device) => (device.id === 'desktop' ? t.desktop : device.name)
 
   useEffect(() => {
-    document.documentElement.lang = locale === 'zh' ? 'zh-CN' : 'en';
-    document.title = `Device Room — ${t.title}`;
-    document.querySelector('meta[name="description"]')?.setAttribute('content', t.subtitle);
+    document.documentElement.lang = locale === 'zh' ? 'zh-CN' : 'en'
+    document.title = `Device Room — ${t.title}`
+    document.querySelector('meta[name="description"]')?.setAttribute('content', t.subtitle)
     try {
-      localStorage.setItem('device-room-locale', locale);
+      localStorage.setItem('device-room-locale', locale)
     } catch {
       /* Storage is optional. */
     }
-  }, [locale, t]);
+  }, [locale, t])
 
   useEffect(() => {
-    if (!modal) return;
-    const previous = document.activeElement as HTMLElement | null;
+    if (!modal) return
+    const previous = document.activeElement as HTMLElement | null
     const onKey = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') setModal(null);
-      if (event.key !== 'Tab') return;
+      if (event.key === 'Escape') setModal(null)
+      if (event.key !== 'Tab') return
       const elements = dialogRef.current?.querySelectorAll<HTMLElement>(
         'button:not([disabled]), a[href], input, select',
-      );
-      if (!elements?.length) return;
+      )
+      if (!elements?.length) return
       const first = elements[0],
-        last = elements[elements.length - 1];
+        last = elements[elements.length - 1]
       if (event.shiftKey && document.activeElement === first) {
-        event.preventDefault();
-        last.focus();
+        event.preventDefault()
+        last.focus()
       } else if (!event.shiftKey && document.activeElement === last) {
-        event.preventDefault();
-        first.focus();
+        event.preventDefault()
+        first.focus()
       }
-    };
-    document.addEventListener('keydown', onKey);
+    }
+    document.addEventListener('keydown', onKey)
     return () => {
-      document.removeEventListener('keydown', onKey);
-      previous?.focus();
-    };
-  }, [modal]);
+      document.removeEventListener('keydown', onKey)
+      previous?.focus()
+    }
+  }, [modal])
 
   function load() {
-    const input = url.trim();
+    const input = url.trim()
     if (!input) {
-      reset();
-      return;
+      reset()
+      return
     }
     try {
-      const normalized = new URL(/^[a-z][a-z\d+.-]*:/i.test(input) ? input : `https://${input}`);
+      const normalized = new URL(/^[a-z][a-z\d+.-]*:/i.test(input) ? input : `https://${input}`)
       if (
         !['http:', 'https:'].includes(normalized.protocol) ||
         !normalized.hostname ||
         normalized.username ||
         normalized.password
       )
-        throw new Error();
+        throw new Error()
       if (location.protocol === 'https:' && normalized.protocol === 'http:') {
-        setError('mixedContent');
-        return;
+        setError('mixedContent')
+        return
       }
-      setCurrentUrl(normalized.href);
-      setUrl(normalized.href);
-      setError(null);
-      setReload((value) => value + 1);
+      setCurrentUrl(normalized.href)
+      setUrl(normalized.href)
+      setError(null)
+      setReload((value) => value + 1)
     } catch {
-      setError('invalidUrl');
+      setError('invalidUrl')
     }
   }
   function reset() {
-    setCurrentUrl('');
-    setUrl('');
-    setError(null);
-    setReload((value) => value + 1);
+    setCurrentUrl('')
+    setUrl('')
+    setError(null)
+    setReload((value) => value + 1)
   }
   function toggleDevice(id: string) {
     setSelected((values) =>
       values.includes(id) ? values.filter((value) => value !== id) : [...values, id],
-    );
+    )
   }
   const appearanceOptions = [
     {
@@ -164,7 +164,7 @@ export default function App() {
       value: cutout,
       action: () => setCutout(!cutout),
     },
-  ];
+  ]
 
   return (
     <div className="app-shell">
@@ -172,8 +172,8 @@ export default function App() {
         <a
           href="#"
           onClick={(event) => {
-            event.preventDefault();
-            reset();
+            event.preventDefault()
+            reset()
           }}
           className="brand"
         >
@@ -227,7 +227,7 @@ export default function App() {
           <div className="device-list">
             {list.map((device) => {
               const Icon = icons[device.kind],
-                active = selected.includes(device.id);
+                active = selected.includes(device.id)
               return (
                 <button
                   key={device.id}
@@ -246,7 +246,7 @@ export default function App() {
                     {active && <Check size={11} />}
                   </span>
                 </button>
-              );
+              )
             })}
           </div>
           <button className="add-device" onClick={() => setModal('devices')}>
@@ -284,7 +284,7 @@ export default function App() {
         </aside>
         <main className="main-workspace">
           <div className="page-intro">
-            <div>
+            <div className="page-intro-content">
               {!sideOpen && (
                 <button
                   className="open-sidebar"
@@ -294,11 +294,13 @@ export default function App() {
                   <PanelLeftClose size={18} />
                 </button>
               )}
-              <h1>
-                {t.title}
-                <span>.</span>
-              </h1>
-              <p>{t.subtitle}</p>
+              <div className="page-intro-text">
+                <h1>
+                  {t.title}
+                  <span>.</span>
+                </h1>
+                <p>{t.subtitle}</p>
+              </div>
             </div>
             <button className="subtle-button" onClick={() => setModal('help')}>
               {t.help}
@@ -308,8 +310,8 @@ export default function App() {
           <form
             className="url-bar"
             onSubmit={(event) => {
-              event.preventDefault();
-              load();
+              event.preventDefault()
+              load()
             }}
           >
             <span className="url-icon">
@@ -322,8 +324,8 @@ export default function App() {
               placeholder={t.placeholder}
               value={url}
               onChange={(event) => {
-                setUrl(event.target.value);
-                setError(null);
+                setUrl(event.target.value)
+                setError(null)
               }}
             />
             <span className="url-shortcut">↵</span>
@@ -407,7 +409,7 @@ export default function App() {
             </div>
             <div className="preview-grid">
               {devices.map((device) => {
-                const Icon = icons[device.kind];
+                const Icon = icons[device.kind]
                 const scale =
                   zoom === 'Auto'
                     ? Math.min(
@@ -415,7 +417,7 @@ export default function App() {
                         (device.kind === 'phone' ? 260 : device.kind === 'tablet' ? 295 : 595) /
                           device.width,
                       )
-                    : Number(zoom);
+                    : Number(zoom)
                 return (
                   <article key={device.id} className={`device-card ${device.kind}`}>
                     <div className="device-card-header">
@@ -512,7 +514,7 @@ export default function App() {
                       <span>{device.width > device.height ? t.landscape : t.portrait}</span>
                     </div>
                   </article>
-                );
+                )
               })}
             </div>
             {!devices.length && (
@@ -572,7 +574,7 @@ export default function App() {
                 <p className="modal-description">{t.addDescription}</p>
                 <div className="device-picker">
                   {list.map((device) => {
-                    const Icon = icons[device.kind];
+                    const Icon = icons[device.kind]
                     return (
                       <button
                         className={selected.includes(device.id) ? 'picked' : ''}
@@ -587,14 +589,14 @@ export default function App() {
                         </small>
                         {selected.includes(device.id) && <Check size={16} />}
                       </button>
-                    );
+                    )
                   })}
                 </div>
                 <form
                   className="custom-device-form"
                   onSubmit={(event) => {
-                    event.preventDefault();
-                    const id = `custom-${crypto.randomUUID()}`;
+                    event.preventDefault()
+                    const id = `custom-${crypto.randomUUID()}`
                     setList([
                       ...list,
                       {
@@ -606,9 +608,9 @@ export default function App() {
                         kind:
                           customWidth > 1000 ? 'desktop' : customWidth > 600 ? 'tablet' : 'phone',
                       },
-                    ]);
-                    setSelected([...selected, id]);
-                    setCustomName('');
+                    ])
+                    setSelected([...selected, id])
+                    setCustomName('')
                   }}
                 >
                   <h3>{t.custom}</h3>
@@ -701,5 +703,5 @@ export default function App() {
         </div>
       )}
     </div>
-  );
+  )
 }
